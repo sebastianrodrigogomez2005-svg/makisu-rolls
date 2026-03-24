@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Makisu Rolls</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+    }
+
+    header {
+      background: linear-gradient(90deg, #000, #1a1a1a);
+      text-align: center;
+      padding: 40px 20px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.35);
+    }
+
+    header h1 {
+      font-size: 42px;
+      color: #ff3c3c;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      color: #ccc;
+      margin-top: 8px;
+    }
+
+    .hero {
+      height: 350px;
+      background: url('https://images.unsplash.com/photo-1604908554007-24d9d0bcb35c?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+    }
+
+    .hero h2 {
+      position: relative;
+      background: rgba(0,0,0,0.6);
+      padding: 15px 25px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 20px 80px;
+    }
+
+    .section {
+      margin-bottom: 50px;
+    }
+
+    .section h2 {
+      color: #ff3c3c;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #ff3c3c;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 0;
+      border-bottom: 1px solid #222;
+    }
+
+    .item span {
+      color: #ffcc00;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      padding: 16px 12px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+      cursor: pointer;
+      border: 1px solid #262626;
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .card:hover {
+      background: #ff3c3c;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(255, 60, 60, 0.18);
+    }
+
+    .whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
+      z-index: 1000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #000;
+      color: #888;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 2000;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 520px;
+      background: #131313;
+      border: 1px solid #2a2a2a;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      animation: aparecer .2s ease;
+    }
+
+    .modal-box h3 {
+      color: #ff3c3c;
+      margin-bottom: 12px;
+      font-size: 28px;
+    }
+
+    .modal-box .cortes {
+      color: #ffcc00;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .modal-box p {
+      color: #e5e5e5;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #ff3c3c;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    @keyframes aparecer {
+      from { transform: translateY(8px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 34px;
+      }
+
+      .hero {
+        height: 280px;
+      }
+
+      .item {
+        font-size: 15px;
+      }
+
+      .whatsapp {
+        padding: 13px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>MAKISU ROLLS</h1>
+    <p>Makis • Alitas • Combos • Bebidas 🍣🔥</p>
+  </header>
+
+  <div class="hero">
+    <h2>El sabor que engancha 🔥</h2>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <h2>🍣 Makis</h2>
+      <div class="grid">
+        <div class="card" onclick="mostrar('Camaleón', '10 cortes', 'Sakana furai y queso crema, cubierto con frescas láminas de ají limo, salsa acevichada y fina decoración de salsa anguila.')">Camaleón</div>
+        <div class="card" onclick="mostrar('Acevichado', '10 cortes', 'Sakana furai, cubierto en láminas de pescado, bañado en salsa acevichada, decorado con togarashi y negi.')">Acevichado</div>
+        <div class="card" onclick="mostrar('Tatyaki', '10 cortes', 'Sakana furai y palta, coronado con calamares salteados en mantequilla, ajo y togarashi, acompañado de salsa acevichada.')">Tatyaki</div>
+        <div class="card" onclick="mostrar('Dragón', '10 cortes', 'Sakana furai y queso crema, cubierto en láminas de palta, salsa especial de la casa y toques de ajonjolí negro tostado.')">Dragón</div>
+        <div class="card" onclick="mostrar('A la Parmesana', '10 cortes', 'Sakana furai y palta, cubierto de queso parmesano y mantequilla de la casa con finas hierbas, flambeado y gratinado.')">A la Parmesana</div>
+        <div class="card" onclick="mostrar('California', '10 cortes', 'Sakana furai, palta y queso crema, terminado con semillas de sésamo tostado, acompañado de salsa acevichada.')">California</div>
+        <div class="card" onclick="mostrar('Emperador', '10 cortes', 'Sakana furai y queso crema, cubierto en láminas de palta y toques de ajonjolí blanco y negro tostado, bañado de salsa dulce anguila.')">Emperador</div>
+        <div class="card" onclick="mostrar('Furai', '10 cortes', 'Sakana furai, palta y queso crema, acompañado de salsa dulce anguila.')">Furai</div>
+        <div class="card" onclick="mostrar('Hot Shogun', '10 cortes', 'Sakana furai y queso crema, salteado en mantequilla, ajo y salsa picante, terminado con salsa dulce anguila.')">Hot Shogun</div>
+        <div class="card" onclick="mostrar('Tropical', '8 cortes', 'Sakana furai y queso crema, aromatizado en tempura, coronado con dados de trozos de piña con salsa teriyaki.')">Tropical</div>
+        <div class="card" onclick="mostrar('Pizza', '10 cortes', 'Sakana furai y queso crema, cubierto de mantequilla de orégano, queso mozzarella, bañado en salsa de pizza y flameado.')">Pizza</div>
+        <div class="card" onclick="mostrar('IQ', '10 cortes', 'Sakana furai y palta, cubierto de salsa spicy, flameado con togarashi, acompañado de salsa acevichada.')">IQ</div>
+        <div class="card" onclick="mostrar('Tokyo', '10 cortes', 'Con cortes de cangrejo, palta y queso crema, terminado con nidos de arroz blanco y negro, coronado con láminas de pez volador.')">Tokyo</div>
+        <div class="card" onclick="mostrar('Hachi Roll', '8 cortes', 'Sakana furai y queso crema, aromatizado en tempura, coronado con nidos de sakana furai, bañado en salsa de ostión.')">Hachi Roll</div>
+        <div class="card" onclick="mostrar('Makisu Parrillero', '10 cortes', 'Sakana furai y queso crema, cubierto con láminas de carne a la parrilla, con chimichurri y acompañado de salsa a base de finas hierbas y ají amarillo.')">Makisu Parrillero</div>
+        <div class="card" onclick="mostrar('Shinsen', '10 cortes', 'Sakana furai y queso crema, cubierto de pescado fresco, láminas de limón, toques de ajonjolí tostado, acompañado de salsa dulce anguila.')">Shinsen</div>
+        <div class="card" onclick="mostrar('Tempura', '8 cortes', 'Sakana furai y queso crema, aromatizado en tempura, coronado con trozos de chaufa ahumada, toques de ajonjolí y salsa dulce anguila.')">Tempura</div>
+        <div class="card" onclick="mostrar('Volcán', '8 cortes', 'Sakana furai y queso crema, coronado con pulpa de cangrejo en salsa spicy y queso parmesano, flameado con salsa de limón y salsa anguila.')">Volcán</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📦 Boxes</h2>
+      <div class="grid">
+        <div class="card" onclick="mostrar('1 tabla', '1 sabor', 'Incluye 1 tabla de makis con 1 solo sabor a elección.')">1 tabla <span>S/ 23.00</span></div>
+        <div class="card" onclick="mostrar('1.5 tablas', '2 sabores', 'Incluye 1 tabla de 1 sabor más 1/2 tabla de 1 sabor. En total puedes elegir 2 sabores.')">1.5 tablas <span>S/ 35.00</span></div>
+<div class="section">
+      <h2>🍱 Combos</h2>
+      <div class="grid">
+        <div class="card" onclick="mostrar('Combo 1', 'S/ 36.00', 'Incluye 1 tabla de makis (1 sabor), 2 piezas de nigiris (1 sabor), 1 wasabi o 1 gari y 2 salsas.')">Combo 1 <span>S/ 36.00</span></div>
+        <div class="card" onclick="mostrar('Combo 2', 'S/ 61.00', 'Incluye 2 tablas de makis (2 sabores), 4 piezas de nigiris (2 sabores), 1 wasabi o 1 gari y 3 salsas.')">Combo 2 <span>S/ 61.00</span></div>
+        <div class="card" onclick="mostrar('Combo 3', 'S/ 36.50', 'Incluye 1 tabla de makis (1 sabor), 6 ebi furai y 1 salsa.')">Combo 3 <span>S/ 36.50</span></div>
+        <div class="card" onclick="mostrar('Combo 4', 'S/ 56.50', 'Incluye 2 tablas de makis (2 sabores), 6 ebi furai y 1 salsa.')">Combo 4 <span>S/ 56.50</span></div>
+        <div class="card" onclick="mostrar('Combo 5', 'S/ 67.00', 'Incluye 2 tablas de makis (2 sabores), 12 ebi furai y 2 salsas.')">Combo 5 <span>S/ 67.00</span></div>
+        <div class="card" onclick="mostrar('Combo 6', 'S/ 33.50', 'Incluye 4 alitas (1 sabor), 6 ebi furai y 1 salsa.')">Combo 6 <span>S/ 33.50</span></div>
+        <div class="card" onclick="mostrar('Combo 7', 'S/ 58.00', 'Incluye 12 alitas (2 sabores), 12 ebi furai y 2 salsas.')">Combo 7 <span>S/ 58.00</span></div>
+        <div class="card" onclick="mostrar('Combo 8', 'S/ 46.00', 'Incluye 1 tabla de makis (1 sabor), 4 alitas (1 sabor) y 1 gaseosa de 500 ml o agua.')">Combo 8 <span>S/ 46.00</span></div>
+        <div class="card" onclick="mostrar('Combo 9', 'S/ 83.00', 'Incluye 2 tablas de makis (2 sabores), 12 alitas (2 sabores) y 1 gaseosa de 500 ml o agua.')">Combo 9 <span>S/ 83.00</span></div>
+        <div class="card" onclick="mostrar('Combo 10', 'S/ 125.50', 'Incluye 3 tablas de makis (3 sabores), 18 alitas (3 sabores) y 2 gaseosas de 500 ml o agua.')">Combo 10 <span>S/ 125.50</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🍗 Alitas</h2>� Combos</h2>
+      <div class="item">Combo 1 <span>S/ 36.00</span></div>
+      <div class="item">Combo 2 <span>S/ 61.00</span></div>
+      <div class="item">Combo 3 <span>S/ 36.50</span></div>
+      <div class="item">Combo 4 <span>S/ 56.50</span></div>
+      <div class="item">Combo 5 <span>S/ 67.00</span></div>
+      <div class="item">Combo 6 <span>S/ 33.50</span></div>
+      <div class="item">Combo 7 <span>S/ 58.00</span></div>
+      <div class="item">Combo 8 <span>S/ 46.00</span></div>
+      <div class="item">Combo 9 <span>S/ 83.00</span></div>
+      <div class="item">Combo 10 <span>S/ 125.50</span></div>
+    </div>
+
+    <div class="section">
+      <h2>🍗 Alitas</h2>
+      <div class="grid">
+        <div class="card" onclick="mostrar('1/2 docena de alitas', 'S/ 20.00', 'Incluye 6 alitas de pollo. Puedes pedirlas en el sabor de tu preferencia.')">1/2 docena <span>S/ 20.00</span></div>
+        <div class="card" onclick="mostrar('1 docena de alitas', 'S/ 36.00', 'Incluye 12 alitas de pollo. Puedes pedirlas en el sabor de tu preferencia.')">1 docena <span>S/ 36.00</span></div>
+        <div class="card" onclick="mostrar('Papas fritas', 'S/ 8.00', 'Papas fritas sazonadas con sal, orégano y toques de chipotle.')">Papas fritas <span>S/ 8.00</span></div>
+        <div class="card" onclick="mostrar('Sabores de alitas', 'Disponibles', 'Apple Cider, Honey Mustard, Lemmon Pepper, Teriyaki, Honey Garlic, Ajilí, Baby Ranch, Mango Habanero, Buffalo y Extra Hot Buffalo.')">Sabores</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🥤 Bebidas</h2>
+      <div class="item">San Luis 500 ml <span>S/ 4.00</span></div>
+      <div class="item">Coca Cola <span>S/ 4.50</span></div>
+      <div class="item">Coca Cola Zero <span>S/ 4.50</span></div>
+      <div class="item">Inca Kola <span>S/ 4.50</span></div>
+      <div class="item">Inca Kola Zero <span>S/ 4.50</span></div>
+      <div class="item">Sprite <span>S/ 4.50</span></div>
+      <div class="item">Fanta <span>S/ 4.50</span></div>
+    </div>
+
+    <div class="section">
+      <h2>🍺 Cervezas</h2>
+      <div class="item">Corona con limón <span>S/ 12.00</span></div>
+      <div class="item">Budweiser <span>S/ 9.00</span></div>
+      <div class="item">Heineken <span>S/ 10.50</span></div>
+      <div class="item">Pilsen Callao <span>S/ 7.50</span></div>
+      <div class="item">Stella Artois <span>S/ 11.50</span></div>
+      <div class="item">Jamaican Red Stripe <span>S/ 12.00</span></div>
+    </div>
+
+    <div class="section">
+      <h2>🍻 Cervezas artesanales</h2>
+      <div class="grid">
+        <div class="card" onclick="mostrar('7 Vidas Ligeras', 'S/ 15.90', 'Variedades disponibles: American Red, Irish Stout, Maíz Morado, Oxapampa Honey Ale, Pale Ale y Quinua Wheat.')">7 Vidas Ligeras <span>S/ 15.90</span></div>
+        <div class="card" onclick="mostrar('7 Vidas Especiales', 'S/ 16.90', 'Variedades disponibles: Cat IPA, Doble IPA, Kiwicha Imperial y Quadrupel.')">7 Vidas Especiales <span>S/ 16.90</span></div>
+        <div class="card" onclick="mostrar('7 Vidas Ediciones Limitadas', 'S/ 17.90', 'Consulta las ediciones limitadas disponibles del momento.')">7 Vidas Ediciones Limitadas <span>S/ 17.90</span></div>
+        <div class="card" onclick="mostrar('Cumbres', 'S/ 16.90', 'Variedades disponibles: Café, Maíz Morado y Maracumanto.')">Cumbres <span>S/ 16.90</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+
+  <a class="whatsapp" href="https://wa.me/51999999999" target="_blank">Pedir por WhatsApp</a>
+
+  <footer>
+    © 2026 Makisu Rolls
+  </footer>
+
+  <div id="modal" class="modal" onclick="cerrarSiFondo(event)">
+    <div class="modal-box">
+      <h3 id="titulo"></h3>
+      <div id="cortes" class="cortes"></div>
+      <p id="descripcion"></p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="cerrar()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function mostrar(nombre, cortes, descripcion) {
+      document.getElementById('titulo').innerText = nombre;
+      document.getElementById('cortes').innerText = cortes;
+      document.getElementById('descripcion').innerText = descripcion;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function cerrar() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    function cerrarSiFondo(event) {
+      if (event.target.id === 'modal') {
+        cerrar();
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') cerrar();
+    });
+  </script>
+
+</body>
+</html>
